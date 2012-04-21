@@ -3,4 +3,3 @@
 class DynamicPagesAppController extends AppController {
 
 }
-

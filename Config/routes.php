@@ -21,3 +21,12 @@ Router::connect('/admin/pages/:action/:id', array(
     'pass' => array('id'),
     'id' => '[0-9]+'
 ));
+
+// dynamic page routing
+Router::connect('/:name', array(
+    'plugin' => 'DynamicPages',
+    'controller' => 'Pages',
+    'action' => 'view'
+), array(
+    'pass' => array('name')
+));
