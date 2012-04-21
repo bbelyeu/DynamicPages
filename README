@@ -6,4 +6,10 @@ Setup:
 2. Add the following line to your app/Config/bootstrap.php
     CakePlugin::load('DynamicPages', array('routes' => true));
 
-3. Use /admin/pages to manage
+3. Use /admin/pages to manage pages
+
+4. Style pages with your site css. The following structure is  the default view.
+<div class="pages view">
+    <h2 class="title">...</h2>
+    <p class="copy">...</p>
+</div>
