@@ -5,21 +5,27 @@ App::uses('DynamicPagesAppController', 'DynamicPages.Controller');
  *
  * @property Page $Page
  */
-class PagesController extends DynamicPagesAppController {
-
-/**
- * view method
- *
- * @param string $id
- * @return void
- */
-	public function view($id = null) {
-		$this->Page->id = $id;
-		if (!$this->Page->exists()) {
-			throw new NotFoundException(__('Invalid page'));
-		}
-		$this->set('page', $this->Page->read(null, $id));
-	}
+class PagesController extends DynamicPagesAppController
+{
+    /**
+     * View dynamically generated page content
+     *
+     * @param string $id
+     * @return void
+     */
+    public function view($url)
+    {   
+        $data = $this->Page->findByUrl($url);
+        if (!empty($data)) {
+            $page_title = $data['Page']['title'];
+            $body_copy = $data['Page']['copy'];
+        } else {
+            throw new NotFoundException(__('Invalid page'));
+        }   
+        $this->set('page_title', $page_title);
+        $this->set('title_for_layout', $page_title);
+        $this->set('body_copy', $body_copy);
+    }
 
 /**
  * admin_index method
