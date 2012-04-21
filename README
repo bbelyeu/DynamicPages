@@ -1,0 +1,9 @@
+CakePhp 2.x Plugin for creating dynamic pages in cake with custom content
+
+Setup:
+1. Import dynamic_pages.sql in Config/Schema/
+
+2. Add the following line to your app/Config/bootstrap.php
+    CakePlugin::load('DynamicPages', array('routes' => true));
+
+3. Use /admin/pages to manage
