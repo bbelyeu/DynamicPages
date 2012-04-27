@@ -6,9 +6,27 @@ Setup:
 2. Add the following line to your app/Config/bootstrap.php
     CakePlugin::load('DynamicPages', array('routes' => true));
 
-3. Use /admin/pages to manage pages
+3. With the routes enabled, any url with a single /:name will match
+    the route for the DynamicPages controller. Thus, if you want to use 
+    /:controller to access a controller's index function then you'll need 
+    to specifically add that to your app/Config/routes.php file. Otherwise
+    this plugin will match the route and handle it before it gets to your controller.
 
-4. Style pages with your site css. The following structure is  the default view.
+4. Use /admin/pages to manage pages
+
+5. You can use the beforeRender() method in your app/Controller/AppController class
+    to assign a different Layout or View file inside your app folder structure.
+    Inside beforeRender() add the conditional statement:
+    if ($this instanceOf PagesController && $this->request->params['plugin'] === 'DynamicPages') {
+        // code goes here
+    }
+    to catch any calls to the DynamicPages plugin.
+    Inside the conditional you can change the layout by setting $this->layout or
+    render a view from /app/Config/View by adding a line:
+    $this->render('/ViewFile');
+    "ViewFile" must be located inside app/View.
+
+6. Style pages with your site css. The following structure is  the default view.
 <div class="pages view">
     <h2 class="title">...</h2>
     <p class="copy">...</p>
