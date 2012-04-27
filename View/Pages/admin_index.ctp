@@ -16,7 +16,7 @@
 		<td><?php echo h($page['Page']['id']); ?>&nbsp;</td>
 		<td><?php echo h($page['Page']['title']); ?>&nbsp;</td>
 		<td><?php echo h($page['Page']['url']); ?>&nbsp;</td>
-		<td><?php echo h($page['Page']['copy']); ?>&nbsp;</td>
+		<td><?php echo h(substr(strip_tags($page['Page']['copy']), 0, 50).'...'); ?>&nbsp;</td>
 		<td><?php echo h($page['Page']['created']); ?>&nbsp;</td>
 		<td><?php echo h($page['Page']['modified']); ?>&nbsp;</td>
 		<td class="actions">

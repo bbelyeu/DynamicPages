@@ -6,7 +6,9 @@
 	<?php
 		echo $this->Form->input('title');
 		echo $this->Form->input('url');
-		echo $this->Form->input('copy');
+		echo $this->Form->input('copy', array(
+            'class' => 'ckeditor'
+        ));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit'));?>
