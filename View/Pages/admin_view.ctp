@@ -16,6 +16,11 @@
 			<?php echo h($page['Page']['url']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Custom View'); ?></dt>
+		<dd>
+			<?php echo h($page['Page']['custom_view']); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Copy'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['copy']); ?>

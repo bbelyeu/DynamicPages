@@ -8,6 +8,18 @@ App::uses('DynamicPagesAppController', 'DynamicPages.Controller');
 class PagesController extends DynamicPagesAppController
 {
     /**
+     * Before filter event
+     *
+     * @link http://book.cakephp.org/2.0/en/controllers.html#Controller::beforeFilter
+     * @return null
+     */
+    public function beforeFilter()
+    {
+        $this->Auth->allow('view');
+        parent::beforeFilter();
+    }
+
+    /**
      * View dynamically generated page content
      *
      * @param string $id
@@ -25,6 +37,12 @@ class PagesController extends DynamicPagesAppController
         $this->set('page_title', $page_title);
         $this->set('title_for_layout', $page_title);
         $this->set('body_copy', $body_copy);
+
+        if (!empty($data['Page']['custom_view'])) {
+            if (file_exists(APP.'View'.DS.'DynamicPages'.DS.$data['Page']['custom_view'])) {
+                $this->render(DS.'DynamicPages'.DS.$data['Page']['custom_view']);
+            }
+        }
     }
 
 /**
