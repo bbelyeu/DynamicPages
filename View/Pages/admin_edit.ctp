@@ -21,6 +21,16 @@
 		<legend><?php echo __('Edit Page'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
+    ?>
+        <div class="clearfix">
+            <label>Current Photo</label>
+		    <img src="/images/<?php echo h($this->data['Page']['image_id']); ?>" />
+        </div>
+    <?php
+        echo $this->Form->input('photo_upload', array(
+            'type' => 'file',
+            'label' => 'Upload new photo'
+        ));
 		echo $this->Form->input('title');
 		echo $this->Form->input('url');
     ?>

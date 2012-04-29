@@ -39,29 +39,32 @@ class PagesController extends DynamicPagesAppController
         $this->set('body_copy', $body_copy);
 
         if (!empty($data['Page']['custom_view'])) {
-            if (file_exists(APP.'View'.DS.'DynamicPages'.DS.$data['Page']['custom_view'])) {
+            $view = APP.'View'.DS.'DynamicPages'.DS.$data['Page']['custom_view'].'.ctp';
+            if (file_exists($view)) {
                 $this->render(DS.'DynamicPages'.DS.$data['Page']['custom_view']);
             }
         }
     }
 
-/**
- * admin_index method
- *
- * @return void
- */
-	public function admin_index() {
+    /**
+     * admin_index method
+     *
+     * @return void
+     */
+	public function admin_index() 
+    {
 		$this->Page->recursive = 0;
 		$this->set('pages', $this->paginate());
 	}
 
-/**
- * admin_view method
- *
- * @param string $id
- * @return void
- */
-	public function admin_view($id = null) {
+    /**
+     * admin_view method
+     *
+     * @param string $id
+     * @return void
+     */
+	public function admin_view($id = null) 
+    {
 		$this->Page->id = $id;
 		if (!$this->Page->exists()) {
 			throw new NotFoundException(__('Invalid page'));
@@ -69,13 +72,18 @@ class PagesController extends DynamicPagesAppController
 		$this->set('page', $this->Page->read(null, $id));
 	}
 
-/**
- * admin_add method
- *
- * @return void
- */
-	public function admin_add() {
+    /**
+     * admin_add method
+     *
+     * @return void
+     */
+	public function admin_add() 
+    {
 		if ($this->request->is('post')) {
+            App::import('Model', 'MysqlImageStorage.Image');
+            $this->ImageComponent = $this->Components->load('MysqlImageStorage.Image');
+            $this->request->data['Page']['image_id'] = $this->ImageComponent->process($this->request->data['Page']);
+
 			$this->Page->create();
 			if ($this->Page->save($this->request->data)) {
 				$this->Session->setFlash(__('The page has been saved'));
@@ -86,18 +94,25 @@ class PagesController extends DynamicPagesAppController
 		}
 	}
 
-/**
- * admin_edit method
- *
- * @param string $id
- * @return void
- */
-	public function admin_edit($id = null) {
+    /**
+     * admin_edit method
+     *
+     * @param string $id
+     * @return void
+     */
+	public function admin_edit($id = null) 
+    {
 		$this->Page->id = $id;
 		if (!$this->Page->exists()) {
 			throw new NotFoundException(__('Invalid page'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
+            if (!empty($this->request->data['Page']['photo_upload'])) {
+                App::import('Model', 'MysqlImageStorage.Image');
+                $this->ImageComponent = $this->Components->load('MysqlImageStorage.Image');
+                $this->request->data['Page']['image_id'] = $this->ImageComponent->process($this->request->data['Page']);
+            }
+
 			if ($this->Page->save($this->request->data)) {
 				$this->Session->setFlash(__('The page has been saved'));
 				$this->redirect(array('action' => 'index'));
@@ -109,13 +124,14 @@ class PagesController extends DynamicPagesAppController
 		}
 	}
 
-/**
- * admin_delete method
- *
- * @param string $id
- * @return void
- */
-	public function admin_delete($id = null) {
+    /**
+     * admin_delete method
+     *
+     * @param string $id
+     * @return void
+     */
+	public function admin_delete($id = null) 
+    {
 		if (!$this->request->is('post')) {
 			throw new MethodNotAllowedException();
 		}
@@ -130,4 +146,5 @@ class PagesController extends DynamicPagesAppController
 		$this->Session->setFlash(__('Page was not deleted'));
 		$this->redirect(array('action' => 'index'));
 	}
+
 }

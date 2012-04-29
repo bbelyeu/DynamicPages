@@ -2,7 +2,6 @@
 	<h2><?php echo __('Pages');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('id');?></th>
 			<th><?php echo $this->Paginator->sort('title');?></th>
 			<th><?php echo $this->Paginator->sort('url');?></th>
 			<th><?php echo $this->Paginator->sort('copy');?></th>
@@ -13,10 +12,9 @@
 	<?php
 	foreach ($pages as $page): ?>
 	<tr>
-		<td><?php echo h($page['Page']['id']); ?>&nbsp;</td>
 		<td><?php echo h($page['Page']['title']); ?>&nbsp;</td>
 		<td><?php echo h($page['Page']['url']); ?>&nbsp;</td>
-		<td><?php echo h(substr(strip_tags($page['Page']['copy']), 0, 50).'...'); ?>&nbsp;</td>
+		<td><?php echo h(substr(strip_tags($page['Page']['copy']), 0, 70).'...'); ?>&nbsp;</td>
 		<td><?php echo h($page['Page']['created']); ?>&nbsp;</td>
 		<td><?php echo h($page['Page']['modified']); ?>&nbsp;</td>
 		<td class="actions">

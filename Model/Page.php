@@ -48,4 +48,19 @@ class Page extends DynamicPagesAppModel {
 			),
 		),
 	);
+
+/**
+ * hasOne associations
+ *
+ * @var array
+ */
+	public $hasOne = array(
+		'Image' => array(
+			'className' => 'MysqlImageStorage.Image',
+			'foreignKey' => 'id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
 }

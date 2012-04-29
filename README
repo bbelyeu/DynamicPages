@@ -1,26 +1,39 @@
 CakePhp 2.x Plugin for creating dynamic pages in cake with custom content
 
 Setup:
-1. Import pages.sql in Config/Schema/
+1. Clone repo into app/Plugins folder
 
-2. Add the following line to your app/Config/bootstrap.php
+2. Import pages.sql in Config/Schema/
+
+3. Add the following line to your app/Config/bootstrap.php
     CakePlugin::load('DynamicPages', array('routes' => true));
 
-3. With the routes enabled, any url with a single /:name will match
+4. If you want to use a custom header image for the page it is configured
+    to work my default with my MysqlImageStorage plugin for a hasOne relationship.
+    If you don't want to use an image, simply comment out the $hasOne property
+    in the Page Model along with any associated fields in the view files.
+    https://github.com/bbelyeu/MysqlImageStorage
+
+4. With the routes enabled, any url with a single /:name will match
     the route for the DynamicPages controller. Thus, if you want to use 
     /:controller to access a controller's index function then you'll need 
     to specifically add that to your app/Config/routes.php file. Otherwise
     this plugin will match the route and handle it before it gets to your controller.
 
-4. To use custom views add a folder called DynamicPages inside your app/View 
+5. To use custom views add a folder called DynamicPages inside your app/View 
     folder. Then place the custom views you'd like to use inside there.
     They will be available for selection from the admin screen.
 
-5. Use /admin/pages to manage pages
+6. Use /admin/pages to manage pages
 
-6. If you don't use a custom view you can still style the pages with your site 
+7. If you don't use a custom view you can still style the pages with your site 
     css. The following structure is  the default view.
 <div class="pages view">
+    <img />
     <h2 class="title">...</h2>
     <p class="copy">...</p>
 </div>
+
+Helpful links:
+http://book.cakephp.org/2.0/en/plugins.html
+https://github.com/bbelyeu/MysqlImageStorage

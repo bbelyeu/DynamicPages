@@ -6,6 +6,11 @@
 			<?php echo h($page['Page']['id']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Image'); ?></dt>
+		<dd>
+			<img src="/images/<?php echo h($page['Page']['image_id']); ?>" />
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Title'); ?></dt>
 		<dd>
 			<?php echo h($page['Page']['title']); ?>
