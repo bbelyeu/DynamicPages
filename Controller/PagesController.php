@@ -80,9 +80,10 @@ class PagesController extends DynamicPagesAppController
 	public function admin_add() 
     {
 		if ($this->request->is('post')) {
-            App::import('Model', 'MysqlImageStorage.Image');
-            $this->ImageComponent = $this->Components->load('MysqlImageStorage.Image');
-            $this->request->data['Page']['image_id'] = $this->ImageComponent->process($this->request->data['Page']);
+            if (App::import('Model', 'MysqlImageStorage.Image')) {
+                $this->ImageComponent = $this->Components->load('MysqlImageStorage.Image');
+                $this->request->data['Page']['image_id'] = $this->ImageComponent->process($this->request->data['Page']);
+            }
 
 			$this->Page->create();
 			if ($this->Page->save($this->request->data)) {
@@ -108,9 +109,10 @@ class PagesController extends DynamicPagesAppController
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
             if (!empty($this->request->data['Page']['photo_upload'])) {
-                App::import('Model', 'MysqlImageStorage.Image');
-                $this->ImageComponent = $this->Components->load('MysqlImageStorage.Image');
-                $this->request->data['Page']['image_id'] = $this->ImageComponent->process($this->request->data['Page']);
+                if (App::import('Model', 'MysqlImageStorage.Image')) {
+                    $this->ImageComponent = $this->Components->load('MysqlImageStorage.Image');
+                    $this->request->data['Page']['image_id'] = $this->ImageComponent->process($this->request->data['Page']);
+                }
             }
 
 			if ($this->Page->save($this->request->data)) {
