@@ -50,6 +50,9 @@ class PagesController extends DynamicPagesAppController
      */
 	public function admin_index() 
     {
+        $this->paginate = array(
+            'order' => array('title' => 'asc'),
+        );
 		$this->Page->recursive = 0;
 		$this->set('pages', $this->paginate());
 	}
