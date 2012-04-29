@@ -16,17 +16,23 @@
 ?>
 <script type="text/javascript" src="/dynamic_pages/ckeditor/ckeditor.js"></script>
 <div class="pages form">
-<?php echo $this->Form->create('Page');?>
+<?php echo $this->Form->create('Page', array('type' => 'file'));?>
 	<fieldset>
 		<legend><?php echo __('Edit Page'); ?></legend>
 	<?php
 		echo $this->Form->input('id');
+        if (!empty($this->data['Page']['image_id'])):
     ?>
         <div class="clearfix">
             <label>Current Photo</label>
 		    <img src="/images/<?php echo h($this->data['Page']['image_id']); ?>" />
         </div>
+    <?php else: ?>
+        <div class="clearfix">
+            <label>No Image Uploaded</label>
+        </div>
     <?php
+        endif;
         echo $this->Form->input('photo_upload', array(
             'type' => 'file',
             'label' => 'Upload new photo'
