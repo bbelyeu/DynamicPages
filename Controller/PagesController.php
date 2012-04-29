@@ -28,15 +28,12 @@ class PagesController extends DynamicPagesAppController
     public function view($url)
     {   
         $data = $this->Page->findByUrl($url);
-        if (!empty($data)) {
-            $page_title = $data['Page']['title'];
-            $body_copy = $data['Page']['copy'];
-        } else {
+        if (empty($data)) {
             throw new NotFoundException(__('Invalid page'));
         }   
-        $this->set('page_title', $page_title);
-        $this->set('title_for_layout', $page_title);
-        $this->set('body_copy', $body_copy);
+
+        $this->data = $data;
+        $this->set('title_for_layout', $data['Page']['title']);
 
         if (!empty($data['Page']['custom_view'])) {
             $view = APP.'View'.DS.'DynamicPages'.DS.$data['Page']['custom_view'].'.ctp';
