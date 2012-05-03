@@ -11,8 +11,8 @@
             }
         }
     }
+    $this->Html->script('/blog/ckeditor/ckeditor.js', array('inline' => false));
 ?>
-<script type="text/javascript" src="/dynamic_pages/ckeditor/ckeditor.js"></script>
 <div class="pages form">
 <?php echo $this->Form->create('Page', array('enctype' => 'multipart/form-data'));?>
 	<fieldset>
