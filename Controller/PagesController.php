@@ -50,6 +50,7 @@ class PagesController extends DynamicPagesAppController
      */
 	public function admin_index() 
     {
+        $this->helpers[] = 'Text';
         $this->paginate = array(
             'order' => array('title' => 'asc'),
         );
