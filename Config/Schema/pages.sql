@@ -8,5 +8,5 @@ create table pages (
     created DATETIME,
     modified DATETIME,
     key title (title),
-    uniuqe key url (url)
+    unique key url (url)
 ) engine=innodb default charset=utf8;
